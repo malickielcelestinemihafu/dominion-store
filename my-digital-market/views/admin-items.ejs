@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Inventory - KINGS MEN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white font-sans min-h-screen flex flex-col selection:bg-white selection:text-black">
+
+    <!-- Header Navigation -->
+    <nav class="border-b border-zinc-800 bg-black/90 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-black tracking-tighter uppercase hover:opacity-80 transition">
+                KINGS MEN
+            </a>
+            <div class="flex items-center space-x-3">
+                <a href="/admin/add" class="bg-white text-black text-xs font-bold px-4 py-2 rounded-full hover:bg-zinc-200 transition">
+                    + Add Product
+                </a>
+                <a href="/admin/requests" class="bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-semibold px-4 py-2 rounded-full hover:text-white hover:border-zinc-700 transition">
+                    View Requests
+                </a>
+                <a href="/admin/logout" class="bg-red-600/20 border border-red-500/30 text-red-400 text-xs font-semibold px-4 py-2 rounded-full hover:bg-red-600 hover:text-white transition">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full">
+        <div class="mb-8">
+            <h1 class="text-4xl font-black tracking-tight uppercase">Inventory Control</h1>
+            <p class="text-zinc-400 text-xs mt-1">Modify item details or drop underperforming stock from the active catalog.</p>
+        </div>
+
+        <div class="bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden backdrop-blur-md">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-zinc-800 bg-zinc-900/90 text-zinc-400 text-xs uppercase tracking-wider">
+                        <th class="p-4 font-bold">Product Title</th>
+                        <th class="p-4 font-bold">Price</th>
+                        <th class="p-4 font-bold text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-800/60 text-sm">
+                    <% items.forEach(item => { %>
+                        <tr class="hover:bg-zinc-800/30 transition">
+                            <td class="p-4 font-semibold text-white"><%= item.title %></td>
+                            <td class="p-4 font-black text-zinc-300">$<%= item.price %></td>
+                            <td class="p-4 text-right space-x-2">
+                                <a href="/admin/edit/<%= item._id %>" class="bg-white text-black px-3.5 py-1.5 rounded-full text-xs font-bold hover:bg-zinc-200 transition inline-block">
+                                    Edit
+                                </a>
+                                <form action="/admin/delete/<%= item._id %>" method="POST" class="inline" onsubmit="return confirm('Delete this product permanently?');">
+                                    <button type="submit" class="bg-red-600/20 border border-red-500/40 text-red-400 px-3.5 py-1.5 rounded-full text-xs font-bold hover:bg-red-600 hover:text-white transition">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 p-6 text-center text-xs text-zinc-600">
+        &copy; 2026 KINGS MEN. Inventory Management Terminal.
+    </footer>
+
+</body>
+</html>

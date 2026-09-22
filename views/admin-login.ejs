@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access - DOMINION</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white font-sans min-h-screen flex flex-col justify-between selection:bg-white selection:text-black">
+
+    <header class="p-6 border-b border-zinc-900">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-black tracking-tighter uppercase hover:opacity-80 transition">
+                DOMINION
+            </a>
+            <a href="/" class="text-xs text-zinc-400 hover:text-white transition font-medium">
+                &larr; Back to Store
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div class="bg-zinc-900/60 border border-zinc-800 p-8 sm:p-10 rounded-2xl w-full max-w-md backdrop-blur-md shadow-2xl">
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl font-black tracking-tight uppercase">Admin Access</h1>
+                <p class="text-zinc-400 text-xs mt-2">Enter credentials to manage DOMINION inventory.</p>
+            </div>
+
+            <% if (error) { %>
+                <div class="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-xl mb-6 text-xs text-center font-semibold">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form action="/admin/login" method="POST" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Username</label>
+                    <input type="text" name="username" required class="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 p-3 rounded-xl text-sm focus:outline-none focus:border-white transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Password</label>
+                    <input type="password" name="password" required class="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 p-3 rounded-xl text-sm focus:outline-none focus:border-white transition">
+                </div>
+                <button type="submit" class="w-full bg-white text-black font-extrabold py-3 rounded-full hover:bg-zinc-200 transition uppercase tracking-wider text-xs mt-2">
+                    Authenticate
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="p-6 border-t border-zinc-900 text-center text-xs text-zinc-600">
+        &copy; 2026 DOMINION. Security Protocol Active.
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINGS MEN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white font-sans min-h-screen flex flex-col selection:bg-white selection:text-black">
+
+    <!-- MATO Style Navigation Bar -->
+    <nav class="border-b border-zinc-800 sticky top-0 bg-black/90 backdrop-blur-md z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Company Branding -->
+            <a href="/" class="text-3xl font-black tracking-tighter uppercase hover:opacity-80 transition">
+                KINGS MEN
+            </a>
+
+            <!-- Search Bar Showcase -->
+            <form action="/" method="GET" class="flex-1 max-w-md mx-4">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-zinc-500">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </span>
+                    <input type="text" name="search" value="<%= searchQuery %>" placeholder="Search items, categories, specs..." class="w-full bg-zinc-900 text-white placeholder-zinc-500 text-sm rounded-full pl-10 pr-4 py-2 border border-zinc-800 focus:outline-none focus:border-white transition">
+                </div>
+            </form>
+
+            <!-- Navigation Pills -->
+            <div class="flex items-center space-x-3">
+                <a href="/" class="hidden sm:inline-block bg-white text-black hover:bg-zinc-200 text-xs font-bold px-5 py-2.5 rounded-full transition">
+                    Explore
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full">
+        
+        <div class="mb-10">
+            <a href="/" class="text-zinc-400 hover:text-white text-sm font-medium transition inline-flex items-center mb-4">
+                &larr; Catalog Overview
+            </a>
+            <h1 class="text-5xl font-black tracking-tight text-white uppercase">
+                <% if (searchQuery) { %>
+                    Search Results for "<%= searchQuery %>"
+                <% } else { %>
+                    Featured Inventory
+                <% } %>
+            </h1>
+        </div>
+
+        <!-- Product Showcase Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <% if (items.length > 0) { %>
+                <% items.forEach(item => { %>
+                    <div class="bg-zinc-900/60 rounded-2xl border border-zinc-800/80 overflow-hidden flex flex-col justify-between group hover:border-zinc-700 transition duration-300">
+                        <div>
+                            <div class="h-56 bg-zinc-950 overflow-hidden relative">
+                                <img src="<%= item.imageUrl %>" alt="<%= item.title %>" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://via.placeholder.com/400x300/18181b/ffffff?text=KINGS+MEN';">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl text-white tracking-tight truncate"><%= item.title %></h3>
+                                <p class="text-zinc-400 text-xs mt-2 line-clamp-2 leading-relaxed"><%= item.description %></p>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0 mt-auto">
+                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-zinc-800/60">
+                                <span class="text-2xl font-black text-white">$<%= item.price %></span>
+                                <a href="/item/<%= item._id %>" class="bg-white hover:bg-zinc-200 text-black text-xs font-bold px-4 py-2.5 rounded-full transition">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="col-span-full text-center py-20 bg-zinc-900/30 rounded-2xl border border-zinc-800">
+                    <p class="text-zinc-500 text-lg">No items matching your query were found.</p>
+                </div>
+            <% } %>
+        </div>
+    </main>
+
+    <!-- MATO Style Bottom Footer with Compiled Admin Button -->
+    <footer class="border-t border-zinc-900 bg-black py-10 mt-16">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-xs text-zinc-500 font-medium">
+                &copy; 2026 KINGS MEN. All rights reserved.
+            </div>
+            
+            <!-- Consolidated Single Admin Portal Button -->
+            <div>
+                <a href="/admin/items" class="bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-semibold px-4 py-2 rounded-full transition flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    Admin Portal
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

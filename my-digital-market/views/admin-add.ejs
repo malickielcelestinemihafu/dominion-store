@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Add Item</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8 font-sans">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Add New Product</h1>
+            <a href="/admin/logout" class="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 font-semibold">Logout</a>
+        </div>
+        <form action="/admin/add" method="POST" class="space-y-4">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">Product Title</label>
+                <input type="text" name="title" required class="w-full border p-2 rounded">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">Description</label>
+                <textarea name="description" required class="w-full border p-2 rounded"></textarea>
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">Price ($)</label>
+                <input type="number" name="price" required class="w-full border p-2 rounded">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">Image URL</label>
+                <input type="text" name="imageUrl" required class="w-full border p-2 rounded">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">Specifications</label>
+                <input type="text" name="specs" class="w-full border p-2 rounded">
+            </div>
+            <button type="submit" class="bg-blue-600 text-white w-full py-2 rounded font-semibold hover:bg-blue-700">Save Item</button>
+        </form>
+        <div class="mt-4 text-center">
+            <a href="/admin/requests" class="text-blue-600 text-sm hover:underline">View Customer Requests &rarr;</a>
+        </div>
+    </div>
+</body>
+</html>

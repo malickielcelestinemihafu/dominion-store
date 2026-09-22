@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buyer Requests</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+        <a href="/" class="text-blue-600 mb-4 inline-block">&larr; Back Home</a>
+        <h2 class="text-2xl font-bold mb-6">Customer Requests & Inquiries</h2>
+        
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-gray-200 text-left">
+                        <th class="p-3">Item</th>
+                        <th class="p-3">Buyer</th>
+                        <th class="p-3">Email</th>
+                        <th class="p-3">Quantity</th>
+                        <th class="p-3">Message</th>
+                        <th class="p-3">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(requests.length === 0) { %>
+                        <tr><td colspan="6" class="p-4 text-center text-gray-500">No requests yet.</td></tr>
+                    <% } else { %>
+                        <% requests.forEach(req => { %>
+                            <tr class="border-t">
+                                <td class="p-3 font-semibold"><%= req.itemTitle %></td>
+                                <td class="p-3"><%= req.buyerName %></td>
+                                <td class="p-3 text-blue-600"><%= req.buyerEmail %></td>
+                                <td class="p-3"><%= req.quantity %></td>
+                                <td class="p-3"><%= req.message %></td>
+                                <td class="p-3 text-sm text-gray-500"><%= req.date.toDateString() %></td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
